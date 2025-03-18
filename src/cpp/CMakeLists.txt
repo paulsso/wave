@@ -4,7 +4,7 @@ add_library(wave_cpp
 
 target_include_directories(wave_cpp
     PUBLIC
-        ${CMAKE_SOURCE_DIR}/include/cpp
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(wave_cpp

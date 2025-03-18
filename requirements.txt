@@ -13,7 +13,7 @@ libblas-dev
 liblapack-dev
 
 # C# development
-dotnet-sdk-7.0
+dotnet-sdk-9.0
 
 # Optional development tools
 clang

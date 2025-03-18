@@ -4,7 +4,7 @@ add_library(wave_core
 
 target_include_directories(wave_core
     PUBLIC
-        ${CMAKE_SOURCE_DIR}/include/core
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(wave_core

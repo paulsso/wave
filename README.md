@@ -11,21 +11,42 @@ WAVE is a modern C/C++/C# simulation platform for acoustic levitation devices, i
 - Modern C++20 implementation
 - Cross-platform GUI using Avalonia UI
 
-## Building from Source
+## Prerequisites
 
-### Prerequisites
-
-- CMake 3.20 or higher
-- C++20 compatible compiler
-- .NET 7.0 SDK
-- BLAS and LAPACK libraries
-- OpenMP
-
-### Ubuntu/Debian Dependencies
+### Build Tools and Libraries
 
 ```bash
-sudo apt install build-essential cmake ninja-build gcc g++ libomp-dev libblas-dev liblapack-dev dotnet-sdk-7.0
+# Install build tools and dependencies
+sudo apt update
+sudo apt install -y \
+    build-essential \
+    cmake \
+    ninja-build \
+    gcc \
+    g++ \
+    libomp-dev \
+    libblas-dev \
+    liblapack-dev \
+    clang \
+    clang-tools
 ```
+
+### .NET 9.0 SDK
+
+1. Add Microsoft package repository:
+```bash
+wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+```
+
+2. Install .NET 9.0 SDK:
+```bash
+sudo apt update
+sudo apt install -y dotnet-sdk-9.0
+```
+
+## Building from Source
 
 ### Building
 
