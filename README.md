@@ -1,4 +1,8 @@
-# WAVE - Workbench for Acoustic Visualization and Experimentation
+# WAVE - Acoustic Wave Simulation
+
+[![CI](https://github.com/paulsso/wave/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/paulsso/wave/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/paulsso/wave/branch/main/graph/badge.svg)](https://codecov.io/gh/paulsso/wave)
+[![Release](https://img.shields.io/github/v/release/paulsso/wave?include_prereleases&sort=semver)](https://github.com/paulsso/wave/releases)
 
 WAVE is a modern C/C++/C# simulation platform for acoustic levitation devices, inspired by the TinyLev project. It provides a comprehensive environment for simulating, visualizing, and optimizing acoustic levitation setups.
 

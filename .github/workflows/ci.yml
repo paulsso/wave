@@ -22,14 +22,41 @@ jobs:
           ninja-build \
           libomp-dev \
           libblas-dev \
-          liblapack-dev
+          liblapack-dev \
+          lcov \
+          python3 \
+          python3-pip
+
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install pytest pytest-cov
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -G Ninja
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" -DCMAKE_C_FLAGS="--coverage" -G Ninja
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config Release
+      run: cmake --build ${{github.workspace}}/build --config Debug
 
     - name: Test
       working-directory: ${{github.workspace}}/build
-      run: ctest -C Release --output-on-failure 
+      run: ctest -C Debug --output-on-failure
+
+    - name: Generate C/C++ coverage report
+      working-directory: ${{github.workspace}}/build
+      run: |
+        lcov --capture --directory . --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' --output-file coverage.info
+        lcov --list coverage.info
+
+    - name: Run Python tests with coverage
+      run: |
+        pytest --cov=. --cov-branch --cov-report=xml
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: |
+          ./build/coverage.info
+          ./coverage.xml 
