@@ -46,4 +46,44 @@ jobs:
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./build/coverage.info 
+        files: ./build/coverage.info
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          clang-format \
+          clang-tidy \
+          python3-pip
+        pip3 install cmakelang
+
+    - name: Install .NET SDK
+      run: |
+        wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y dotnet-sdk-9.0
+
+    - name: Check C/C++ formatting
+      run: |
+        find src -type f \( -name "*.cpp" -o -name "*.h" -o -name "*.c" \) -exec clang-format --style=file --dry-run --Werror {} \;
+
+    - name: Check CMake formatting
+      run: |
+        find . -type f -name "CMakeLists.txt" -exec cmakelang --check {} \;
+
+    - name: Check C# formatting
+      run: |
+        cd src/gui
+        dotnet format --check
+
+    - name: Run C# static analysis
+      run: |
+        cd src/gui
+        dotnet build /p:TreatWarningsAsErrors=true
+        dotnet analyze --no-build 
