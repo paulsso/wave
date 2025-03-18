@@ -1,0 +1,39 @@
+# Build directories
+build/
+out/
+bin/
+obj/
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# .NET files
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# OS files
+.DS_Store
+Thumbs.db 
