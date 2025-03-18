@@ -1,0 +1,20 @@
+# Build tools
+build-essential
+cmake
+ninja-build
+
+# C/C++ development
+gcc
+g++
+libomp-dev
+
+# Linear algebra libraries
+libblas-dev
+liblapack-dev
+
+# C# development
+dotnet-sdk-7.0
+
+# Optional development tools
+clang
+clang-tools 
