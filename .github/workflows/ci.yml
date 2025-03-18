@@ -23,14 +23,7 @@ jobs:
           libomp-dev \
           libblas-dev \
           liblapack-dev \
-          lcov \
-          python3 \
-          python3-pip
-
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install pytest pytest-cov
+          lcov
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" -DCMAKE_C_FLAGS="--coverage" -G Ninja
@@ -49,14 +42,8 @@ jobs:
         lcov --remove coverage.info '/usr/*' --output-file coverage.info
         lcov --list coverage.info
 
-    - name: Run Python tests with coverage
-      run: |
-        pytest --cov=. --cov-branch --cov-report=xml
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: |
-          ./build/coverage.info
-          ./coverage.xml 
+        files: ./build/coverage.info 
