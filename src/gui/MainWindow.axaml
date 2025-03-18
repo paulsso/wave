@@ -17,13 +17,7 @@
 
         <!-- Top Menu -->
         <Menu Grid.Row="0">
-            <MenuItem x:Name="FileMenu" Header="_File">
-                <MenuItem Header="_New Simulation" InputGesture="Ctrl+N"/>
-                <MenuItem Header="_Open..." InputGesture="Ctrl+O"/>
-                <MenuItem Header="_Save" InputGesture="Ctrl+S"/>
-                <Separator/>
-                <MenuItem Header="_Exit" InputGesture="Alt+F4"/>
-            </MenuItem>
+            <MenuItem x:Name="FileMenu" Header="_File"/>
             <MenuItem Header="_Edit">
                 <MenuItem Header="_Parameters..."/>
                 <MenuItem Header="_Preferences..."/>
