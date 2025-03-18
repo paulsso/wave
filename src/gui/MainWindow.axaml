@@ -1,0 +1,130 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WaveGui"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+        x:Class="WaveGui.MainWindow"
+        Title="WAVE - Acoustic Wave Simulation"
+        Width="1280" Height="720"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Menu -->
+        <Menu Grid.Row="0">
+            <MenuItem x:Name="FileMenu" Header="_File">
+                <MenuItem Header="_New Simulation" InputGesture="Ctrl+N"/>
+                <MenuItem Header="_Open..." InputGesture="Ctrl+O"/>
+                <MenuItem Header="_Save" InputGesture="Ctrl+S"/>
+                <Separator/>
+                <MenuItem Header="_Exit" InputGesture="Alt+F4"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Parameters..."/>
+                <MenuItem Header="_Preferences..."/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_3D View"/>
+                <MenuItem Header="_2D Slices"/>
+                <MenuItem Header="_Pressure Field"/>
+            </MenuItem>
+            <MenuItem Header="_Simulation">
+                <MenuItem Header="_Start" InputGesture="F5"/>
+                <MenuItem Header="_Pause" InputGesture="F6"/>
+                <MenuItem Header="_Stop" InputGesture="F7"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Documentation"/>
+                <MenuItem Header="_About"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Control Panel -->
+            <Border Grid.Column="0" Background="#F5F5F5" BorderBrush="#DDDDDD" BorderThickness="0,0,1,0">
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Simulation Parameters" FontWeight="Bold" Margin="0,0,0,10"/>
+                        
+                        <!-- Wave Parameters -->
+                        <Border Background="White" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4" Padding="5" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Wave Parameters" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Label Content="Frequency (Hz):"/>
+                                <TextBox Text="40000"/>
+                                
+                                <Label Content="Amplitude (Pa):"/>
+                                <TextBox Text="1000"/>
+                                
+                                <Label Content="Phase (rad):"/>
+                                <TextBox Text="0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Geometry -->
+                        <Border Background="White" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4" Padding="5" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Geometry" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Label Content="Grid Size:"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="100" Margin="0,0,2,0"/>
+                                    <TextBox Grid.Column="1" Text="100" Margin="2,0"/>
+                                    <TextBox Grid.Column="2" Text="100" Margin="2,0,0,0"/>
+                                </Grid>
+                                
+                                <Label Content="Grid Spacing (m):"/>
+                                <TextBox Text="0.001"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Material Properties -->
+                        <Border Background="White" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4" Padding="5" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Material Properties" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Label Content="Density (kg/m³):"/>
+                                <TextBox Text="1.225"/>
+                                
+                                <Label Content="Sound Speed (m/s):"/>
+                                <TextBox Text="343"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Simulation Control -->
+                        <Border Background="White" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4" Padding="5" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Simulation Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Button Content="Start Simulation" Click="StartSimulation_Click" Margin="0,5"/>
+                                <Button Content="Pause" Click="PauseSimulation_Click" Margin="0,5"/>
+                                <Button Content="Stop" Click="StopSimulation_Click" Margin="0,5"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- 3D View -->
+            <Grid Grid.Column="1">
+                <TextBlock Text="3D Visualization" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center"
+                         FontSize="24"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window> 
